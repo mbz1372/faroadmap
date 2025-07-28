@@ -39,6 +39,8 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import Head from "next/head";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const vazir = Vazirmatn({ subsets: ["arabic"], weight: ["400", "700"] });
 
@@ -53,7 +55,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body className={`${vazir.className} bg-gray-50 text-gray-900`}>{children}</body>
+      <body className={`${vazir.className} bg-gray-50 text-gray-900`}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
@@ -104,10 +110,10 @@ export default function RoadmapPage({ params }: Params) {
   const data = slug === "frontend" ? frontendRoadmap : slug === "backend" ? backendRoadmap : [];
 
   return (
-    <main className="p-6 max-w-4xl mx-auto">
+    <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">نقشه راه {slug === "frontend" ? "فرانت‌اند" : slug === "backend" ? "بک‌اند" : ""}</h1>
       <RoadmapTree steps={data} />
-    </main>
+    </div>
   );
 }
 
@@ -129,7 +135,7 @@ const roadmaps = [
 
 export default function HomePage() {
   return (
-    <main className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-4xl mx-auto p-6 space-y-6">
       <h1 className="text-3xl font-bold mb-4 text-blue-700">نقشه‌ راه‌های یادگیری توسعه وب</h1>
       <p className="text-gray-700 mb-8 text-sm">هر مسیر را انتخاب کن تا مراحل یادگیری آن را ببینی.</p>
 
@@ -145,6 +151,6 @@ export default function HomePage() {
           </Link>
         ))}
       </div>
-    </main>
+    </div>
   );
 }
